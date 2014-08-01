@@ -35,8 +35,8 @@
 
 <p>HTTPNinja is a SmallTalk framework to write Rest Api clients with minimal effort. It is heavily inspired from <a href="https://github.com/jnunemaker/httparty">HTTParty</a> in Ruby. The goal is to write fully functional Rest Api clients without writing any redundant code. </p>
 
-<h1>
-<a name="examples" class="anchor" href="#examples"><span class="octicon octicon-link"></span></a>Examples</h1>
+<h2>
+<a name="examples" class="anchor" href="#examples"><span class="octicon octicon-link"></span></a>Examples</h2>
 
 <p>Let's create a client to connect to GitHub. </p>
 
@@ -55,7 +55,13 @@
 </pre></div>
 
 <ul>
-<li>(Optional) Specify the output format of the Api as XML or JSON. HTTPNinja will automatically convert XML or JSON output to Smalltalk data structures </li>
+<li>Define a method to provide Default Query parameters</li>
+</ul><div class="highlight highlight-ruby"><pre><span class="no">GitHub</span><span class="o">&gt;&gt;</span><span class="n">defaultParams</span>
+    <span class="o">^</span><span class="p">{</span> <span class="c1">#region -&gt; 'US' }.</span>
+</pre></div>
+
+<ul>
+<li>Specify the output format of the Api as XML or JSON. HTTPNinja will automatically convert XML or JSON output to Smalltalk data structures </li>
 </ul><div class="highlight highlight-ruby"><pre><span class="no">GitHub</span><span class="o">&gt;&gt;</span><span class="n">outputFormat</span>
     <span class="o">^</span><span class="c1">#json</span>
 </pre></div>
@@ -91,6 +97,30 @@ userrepos :<span class="o">=</span> y userRepos:<span class="s1">'manojkr'</span
 </pre></div>
 
 <h2>
+<a name="api-reference" class="anchor" href="#api-reference"><span class="octicon octicon-link"></span></a>Api Reference</h2>
+
+<p>HTTPNinja provides methods for commonly used HTTP verbs.</p>
+
+<div class="highlight highlight-ruby"><pre><span class="ss">get</span><span class="p">:</span><span class="n">path</span>
+<span class="n">make</span> <span class="n">a</span> <span class="no">GET</span> <span class="n">request</span> <span class="n">at</span> <span class="n">location</span> <span class="s2">"path"</span>
+
+<span class="ss">get</span><span class="p">:</span><span class="n">path</span> <span class="ss">params</span><span class="p">:</span><span class="n">queryParams</span>
+<span class="n">make</span> <span class="n">a</span> <span class="no">GET</span> <span class="n">request</span> <span class="n">at</span> <span class="n">location</span> <span class="s2">"path"</span> <span class="n">with</span> <span class="s2">"queryParams"</span> <span class="n">dictionary</span> <span class="n">as</span> <span class="no">Query</span> <span class="no">Parameters</span>
+
+<span class="ss">postForm</span><span class="p">:</span><span class="n">dictionary</span> <span class="ss">to</span><span class="p">:</span> <span class="n">path</span>
+<span class="no">POST</span> <span class="n">dictionary</span> <span class="n">as</span> <span class="n">a</span> <span class="n">form</span> <span class="n">with</span> <span class="n">encoding</span> <span class="n">type</span> <span class="s2">"application/x-www-form-urlencoded"</span> <span class="n">to</span> <span class="n">location</span> <span class="s2">"path"</span>
+
+<span class="ss">postJson</span><span class="p">:</span><span class="n">json</span> <span class="ss">to</span><span class="p">:</span> <span class="n">path</span>
+<span class="no">POST</span> <span class="no">JSON</span> <span class="n">string</span> <span class="n">with</span> <span class="n">headers</span> <span class="s1">'Content-type:application/json'</span> <span class="n">to</span> <span class="n">location</span> <span class="s2">"path"</span>
+
+<span class="ss">postDictAsJson</span><span class="p">:</span><span class="n">dic</span> <span class="ss">to</span><span class="p">:</span><span class="n">path</span>
+<span class="no">Convert</span> <span class="n">dictionary</span> <span class="s2">"dic"</span> <span class="n">to</span> <span class="no">JSON</span> <span class="ow">and</span> <span class="no">POST</span> <span class="n">resulting</span> <span class="no">JSON</span> <span class="n">string</span> <span class="n">with</span> <span class="n">headers</span> <span class="s1">'Content-type:application/json'</span> <span class="n">to</span> <span class="n">location</span> <span class="s2">"path"</span>
+
+<span class="ss">postXml</span><span class="p">:</span><span class="n">xml</span> <span class="ss">to</span><span class="p">:</span><span class="n">path</span>
+<span class="no">POST</span> <span class="no">XML</span> <span class="n">string</span> <span class="n">with</span> <span class="n">headers</span> <span class="s1">'Content-type:application/xml'</span> <span class="n">to</span> <span class="n">location</span> <span class="s2">"path"</span>
+</pre></div>
+
+<h2>
 <a name="version" class="anchor" href="#version"><span class="octicon octicon-link"></span></a>Version</h2>
 
 <p>0.1</p>
@@ -98,7 +128,7 @@ userrepos :<span class="o">=</span> y userRepos:<span class="s1">'manojkr'</span
 <h2>
 <a name="tech" class="anchor" href="#tech"><span class="octicon octicon-link"></span></a>Tech</h2>
 
-<p>Dillinger uses a number of open source projects to work properly:</p>
+<p>HTTPNinja uses a number of open source projects to work properly:</p>
 
 <ul>
 <li>
