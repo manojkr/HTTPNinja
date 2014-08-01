@@ -3,8 +3,11 @@ HTTPNinja
 
 HTTPNinja is a SmallTalk framework to write Rest Api clients with minimal effort. It is heavily inspired from [HTTParty] in Ruby. The goal is to write fully functional Rest Api clients without writing any redundant code. 
 
+
+
 Examples
-==========
+---------------------
+
 Let's create a client to connect to GitHub. 
 
  - Create a GitHub that extends RESTClient
@@ -20,8 +23,13 @@ RESTClient subclass: #GitHub
 GitHub>>baseUri
 	^'https://api.github.com/'.
 ```
+ - Define a method to provide Default Query parameters
+```ruby
+GitHub>>defaultParams
+	^{ #region -> 'US' }.
+```
 
- - (Optional) Specify the output format of the Api as XML or JSON. HTTPNinja will automatically convert XML or JSON output to Smalltalk data structures 
+ - Specify the output format of the Api as XML or JSON. HTTPNinja will automatically convert XML or JSON output to Smalltalk data structures 
 ```ruby 
 GitHub>>outputFormat
 	^#json
@@ -55,6 +63,30 @@ userinfo := y user:'manojkr'.
 userrepos := y userRepos:'manojkr'.
 ```
 
+Api Reference
+--------
+HTTPNinja provides methods for commonly used HTTP verbs.
+
+```
+get:path
+make a GET request at location "path"
+
+get:path params:queryParams
+make a GET request at location "path" with "queryParams" dictionary as Query Parameters
+
+postForm:dictionary to: path
+POST dictionary as a form with encoding type "application/x-www-form-urlencoded" to location "path"
+
+postJson:json to: path
+POST JSON string with headers 'Content-type:application/json' to location "path"
+
+postDictAsJson:dic to:path
+Convert dictionary "dic" to JSON and POST resulting JSON string with headers 'Content-type:application/json' to location "path"
+
+postXml:xml to:path
+POST XML string with headers 'Content-type:application/xml' to location "path"
+```
+
 Version
 ----
 
@@ -63,7 +95,7 @@ Version
 Tech
 -----------
 
-Dillinger uses a number of open source projects to work properly:
+HTTPNinja uses a number of open source projects to work properly:
 
 * [Zinc HTTP Components] - an open-source Smalltalk framework to deal with the HTTP networking protocol
 * [Zinc SSO] - framework for implementations of client side OAuth & OpenID & SSL
